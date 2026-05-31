@@ -706,6 +706,39 @@
     }
 
     /* ============================================================
+       PROMO VIDEO SECTION
+    ============================================================ */
+    .promo-video-section { padding: 20px 0 70px; }
+    .promo-video-wrap { max-width: 900px; margin: 0 auto; }
+    .promo-video-label { text-align: center; margin-bottom: 28px; }
+    .promo-video-label .section-eyebrow { margin-bottom: 10px; }
+    .promo-video-label h2 {
+      font-size: clamp(24px, 3.5vw, 40px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+    .video-frame {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,162,39,0.1);
+      background: #000;
+      position: relative;
+    }
+    .video-frame .vimeo-wrapper {
+      padding: 56.25% 0 0 0;
+      position: relative;
+    }
+    .video-frame iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* ============================================================
        REGISTRATION FORM
     ============================================================ */
     .register-section {
@@ -994,6 +1027,26 @@
     </div>
   </div>
 </section>
+
+<!-- ============================================================
+     PROMO VIDEO
+============================================================ -->
+<section class="promo-video-section">
+  <div class="container">
+    <div class="promo-video-wrap">
+      <div class="promo-video-label reveal">
+        <div class="section-eyebrow">Watch This First</div>
+        <h2>What this <span class="gold">mastermind</span> is really about.</h2>
+      </div>
+      <div class="video-frame reveal d1">
+        <div class="vimeo-wrapper">
+          <iframe src="https://player.vimeo.com/video/1197178860?h=77cd8670aa&badge=0&autopause=0&player_id=0&app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="TWC_RealEstate_Promo1"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ============================================================
      SOCIAL PROOF STRIP
