@@ -1,0 +1,2264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The Power of the Winners Circle Will Take Your Business to the Next Level" />
+  <title>The Winners Circle – Built for Those Who Want More</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://player.vimeo.com/api/player.js" defer></script>
+  <style>
+    /* ============================================================
+       RESET + VARIABLES
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080808;
+      --bg-1:      #0f0f0f;
+      --bg-2:      #181818;
+      --bg-3:      #222222;
+      --gold:      #C9A227;
+      --gold-lt:   #E8C84A;
+      --gold-dk:   #9A7A18;
+      --gold-glow: rgba(201,162,39,0.18);
+      --gold-dim:  rgba(201,162,39,0.10);
+      --text:      #FFFFFF;
+      --text-2:    #9A9A9A;
+      --text-3:    #555555;
+      --radius:    20px;
+      --ease:      cubic-bezier(0.16,1,0.3,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ============================================================
+       UTILITIES
+    ============================================================ */
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .gold { color: var(--gold); }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-size: clamp(30px, 4.5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-2);
+      line-height: 1.65;
+      max-width: 500px;
+    }
+
+    /* Scroll-reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.85s var(--ease), transform 0.85s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 22px 0;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    #nav.scrolled {
+      padding: 14px 0;
+      background: rgba(8,8,8,0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-color: rgba(255,255,255,0.07);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-link {
+      font-size: 14px;
+      color: var(--text-2);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 100px;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-link-app { color: var(--gold) !important; border: 1px solid rgba(201,162,39,0.3); border-radius: 100px; }
+    .nav-link-app:hover { background: rgba(201,162,39,0.08); }
+
+    /* Mobile hamburger */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 201;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 199;
+      background: rgba(8,8,8,0.97);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .mobile-menu.open { opacity: 1; transform: translateY(0); }
+    .mobile-menu a {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 16px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); background: rgba(201,162,39,0.07); }
+    .mobile-menu .mobile-menu-cta {
+      margin-top: 16px;
+      background: var(--gold);
+      color: #000;
+      font-size: 18px;
+      padding: 16px 40px;
+      border-radius: 100px;
+    }
+    .mobile-menu .mobile-menu-cta:hover { background: var(--gold-lt); color: #000; }
+
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+    }
+    .nav-cta {
+      background: var(--gold);
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 22px;
+      border-radius: 100px;
+      text-decoration: none;
+      letter-spacing: 0.2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--gold-lt); transform: scale(1.03); }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 140px 28px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 100% 70% at 50% -10%, rgba(201,162,39,0.14) 0%, transparent 65%);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+    }
+    /* Subtle grid lines */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.024) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 30%, black 40%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 30%, black 40%, transparent 80%);
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      padding: 7px 18px;
+      border: 1px solid rgba(201,162,39,0.28);
+      border-radius: 100px;
+      background: rgba(201,162,39,0.07);
+    }
+    .hero-pill::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 6px var(--gold);
+    }
+    .hero h1 {
+      font-size: clamp(38px, 6.5vw, 78px);
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -2.5px;
+      margin-bottom: 26px;
+      max-width: 880px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 55%, #F5D675 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: var(--text-2);
+      font-weight: 400;
+      line-height: 1.65;
+      max-width: 560px;
+      margin: 0 auto 48px;
+    }
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--gold);
+      color: #000;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 100px;
+      text-decoration: none;
+      letter-spacing: 0.1px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 0 0 rgba(201,162,39,0);
+    }
+    .btn-primary:hover {
+      background: var(--gold-lt);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 48px rgba(201,162,39,0.42);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-2);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 16px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.11);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.28); color: var(--text); }
+    .hero-social-proof {
+      margin-top: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--text-3);
+      font-size: 13px;
+    }
+    .proof-stars { color: var(--gold); font-size: 14px; letter-spacing: 1px; }
+
+    /* ============================================================
+       STATS STRIP
+    ============================================================ */
+    .stats-strip {
+      background: var(--bg-1);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 52px 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .stat-item {
+      text-align: center;
+      padding: 8px 24px;
+    }
+    .stat-item + .stat-item {
+      border-left: 1px solid rgba(255,255,255,0.07);
+    }
+    .stat-num {
+      font-size: clamp(38px, 5vw, 58px);
+      font-weight: 900;
+      letter-spacing: -2.5px;
+      line-height: 1;
+      color: var(--gold);
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-3);
+      font-weight: 500;
+      margin-top: 7px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ============================================================
+       APPLE-STYLE FEATURE SCROLL
+    ============================================================ */
+    .features-section { position: relative; }
+
+    .features-intro {
+      text-align: center;
+      padding: 110px 28px 18px;
+    }
+
+    .features-track {
+      height: 260vh;
+      position: relative;
+    }
+    .features-sticky {
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+      overflow: hidden;
+    }
+    .features-sticky > .container {
+      width: 100%;
+      position: relative;
+    }
+    .features-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    /* ---- Text cards ---- */
+    .feature-text-wrap {
+      position: relative;
+      height: 380px;
+    }
+    .f-card {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 20px;
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+      pointer-events: none;
+    }
+    .f-card.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .f-card.exit {
+      opacity: 0;
+      transform: translateY(-32px);
+    }
+    .f-step {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .f-title {
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 800;
+      letter-spacing: -1.2px;
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+    .f-desc {
+      font-size: 17px;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 28px;
+      font-weight: 400;
+      max-width: 420px;
+    }
+    .f-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .f-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+    .f-bullets li .bul-icon {
+      width: 20px; height: 20px;
+      min-width: 20px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      background: var(--gold-dim);
+      display: grid;
+      place-items: center;
+      margin-top: 2px;
+    }
+    .f-bullets li .bul-icon svg { width: 10px; height: 10px; }
+
+    /* ---- Visual cards ---- */
+    .feature-vis-wrap {
+      position: relative;
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .f-vis {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+      pointer-events: none;
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    }
+    .f-vis.active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+    .f-vis-emoji { font-size: 88px; line-height: 1; filter: drop-shadow(0 4px 24px rgba(201,162,39,0.3)); }
+    .f-vis-label {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: -0.3px;
+    }
+
+    /* ---- Scroll progress dots ---- */
+    .f-dots {
+      position: absolute;
+      right: -16px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .f-dot {
+      width: 3px;
+      height: 18px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.18);
+      transition: background 0.3s, height 0.3s var(--ease);
+      cursor: pointer;
+    }
+    .f-dot.active {
+      background: var(--gold);
+      height: 36px;
+    }
+
+    /* ============================================================
+       QUOTE SECTION
+    ============================================================ */
+    .quote-section {
+      padding: 20px 28px 100px;
+      text-align: center;
+      background: linear-gradient(180deg, #0A0800 0%, var(--bg) 100%);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .big-quote {
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: -0.4px;
+      max-width: 780px;
+      margin: 0 auto 20px;
+    }
+    .big-quote .qmark { color: var(--gold); font-size: 1.4em; line-height: 0; vertical-align: -0.2em; font-style: normal; }
+    .quote-by {
+      font-size: 13px;
+      color: var(--text-3);
+    }
+    .quote-by strong { color: var(--text-2); font-weight: 600; }
+
+    /* ============================================================
+       ABOUT JOHN
+    ============================================================ */
+    .about-section {
+      padding: 120px 0;
+      background: var(--bg-1);
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .about-img-wrap {
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      background: var(--bg-2);
+      position: relative;
+    }
+    .about-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .about-badge {
+      position: absolute;
+      bottom: 20px; left: 20px; right: 20px;
+      background: rgba(8,8,8,0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(201,162,39,0.22);
+      border-radius: 16px;
+      padding: 16px 20px;
+    }
+    .about-badge .b-name { font-size: 15px; font-weight: 700; }
+    .about-badge .b-role { font-size: 12px; color: var(--gold); font-weight: 500; margin-top: 2px; }
+    .about-text {}
+    .about-quote-line {
+      font-size: clamp(18px, 2.2vw, 24px);
+      font-weight: 600;
+      line-height: 1.5;
+      letter-spacing: -0.3px;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    .about-quote-line em { font-style: italic; color: var(--gold); }
+    .about-body {
+      font-size: 15.5px;
+      color: var(--text-2);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .about-achievements {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 36px;
+    }
+    .achiev {
+      background: var(--bg-2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 20px 22px;
+    }
+    .achiev .a-num {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .achiev .a-label {
+      font-size: 12.5px;
+      color: var(--text-3);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* ============================================================
+       APP FEATURES SECTION
+    ============================================================ */
+    .app-features-section { position: relative; background: var(--bg-1); }
+    .app-features-intro {
+      text-align: center;
+      padding: 110px 28px 18px;
+    }
+    .app-features-track {
+      height: 560vh;
+      position: relative;
+    }
+    .app-features-sticky {
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+      overflow: hidden;
+    }
+    .app-features-sticky > .container { width: 100%; max-width: 1200px; position: relative; }
+    .app-features-layout {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    /* Text cards */
+    .app-text-wrap { position: relative; height: 380px; }
+    .af-card {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 10px;
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+      pointer-events: none;
+    }
+    .af-card.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .af-card.exit { opacity: 0; transform: translateY(-32px); }
+    .af-step { font-size: 10.5px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .af-title { font-size: clamp(26px, 3vw, 42px); font-weight: 800; letter-spacing: -1px; line-height: 1.15; margin-bottom: 16px; }
+    .af-desc { font-size: 16px; color: var(--text-2); line-height: 1.7; margin-bottom: 24px; max-width: 420px; }
+    .af-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold);
+      background: var(--gold-dim);
+      border: 1px solid rgba(201,162,39,0.25);
+      padding: 6px 14px;
+      border-radius: 100px;
+    }
+
+    /* App mockup frame */
+    .app-mockup-wrap { position: relative; height: 500px; display: flex; align-items: center; justify-content: center; }
+    .af-mockup {
+      position: absolute;
+      width: 100%;
+      max-width: 100%;
+      opacity: 0;
+      transform: scale(0.93);
+      transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+      pointer-events: none;
+    }
+    .af-mockup.active { opacity: 1; transform: scale(1); pointer-events: auto; }
+
+    /* Browser chrome frame */
+    .mock-browser {
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,162,39,0.08);
+    }
+    .mock-bar {
+      background: #1a1a1a;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .mock-dots { display: flex; gap: 5px; }
+    .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mock-dot:nth-child(1) { background: #FF5F57; }
+    .mock-dot:nth-child(2) { background: #FFBD2E; }
+    .mock-dot:nth-child(3) { background: #28C840; }
+    .mock-url {
+      flex: 1;
+      background: rgba(255,255,255,0.06);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 10px;
+      color: var(--text-3);
+      font-family: monospace;
+    }
+    .mock-body {
+      display: flex;
+      min-height: 400px;
+      background: #0d0d0d;
+    }
+    .mock-sidebar {
+      width: 130px;
+      min-width: 130px;
+      background: #0a0a0a;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 14px 0;
+    }
+    .mock-logo {
+      padding: 4px 14px 12px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 8px;
+    }
+    .mock-nav-item {
+      padding: 7px 14px;
+      font-size: 10px;
+      color: var(--text-3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 6px;
+      margin: 1px 6px;
+    }
+    .mock-nav-item.active-nav {
+      background: rgba(201,162,39,0.12);
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .mock-content { flex: 1; padding: 16px; overflow: hidden; }
+    .mock-page-title { font-size: 13px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+    .mock-card {
+      background: #181818;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 8px;
+      font-size: 10px;
+    }
+    .mock-card-title { font-size: 11px; font-weight: 600; margin-bottom: 4px; }
+    .mock-card-sub { color: var(--text-3); font-size: 9.5px; }
+    .mock-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 100px;
+      margin-bottom: 6px;
+    }
+    .mock-badge.gold { background: rgba(201,162,39,0.2); color: var(--gold); }
+    .mock-badge.green { background: rgba(40,200,64,0.15); color: #28C840; }
+    .mock-badge.blue { background: rgba(59,130,246,0.15); color: #60a5fa; }
+    .mock-progress-bar { background: rgba(255,255,255,0.08); border-radius: 100px; height: 5px; margin-top: 8px; overflow: hidden; }
+    .mock-progress-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--gold), var(--gold-lt)); }
+    .mock-stats { display: flex; gap: 8px; margin-bottom: 10px; }
+    .mock-stat { background: #181818; border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; padding: 8px; flex: 1; text-align: center; }
+    .mock-stat-num { font-size: 14px; font-weight: 800; color: var(--gold); }
+    .mock-stat-lbl { font-size: 8px; color: var(--text-3); margin-top: 2px; }
+    .mock-tabs { display: flex; gap: 4px; margin-bottom: 10px; flex-wrap: wrap; }
+    .mock-tab { font-size: 8.5px; padding: 3px 8px; border-radius: 100px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.07); color: var(--text-3); }
+    .mock-tab.active-tab { background: rgba(201,162,39,0.15); color: var(--gold); border-color: rgba(201,162,39,0.3); }
+    .mock-channels { display: flex; flex-direction: column; gap: 2px; margin-bottom: 10px; }
+    .mock-channel { font-size: 9.5px; padding: 4px 6px; border-radius: 4px; color: var(--text-3); display: flex; align-items: center; gap: 4px; }
+    .mock-channel.active-ch { background: rgba(201,162,39,0.1); color: var(--gold); font-weight: 600; }
+    .mock-post { background: #181818; border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 8px; margin-bottom: 6px; }
+    .mock-post-header { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+    .mock-avatar { width: 20px; height: 20px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 8px; font-weight: 700; color: #000; }
+    .mock-post-name { font-size: 9.5px; font-weight: 600; }
+    .mock-post-text { font-size: 9px; color: var(--text-2); line-height: 1.4; }
+    .mock-dm { background: #181818; border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 8px; margin-bottom: 6px; display: flex; gap: 8px; align-items: flex-start; }
+    .mock-dm-body { flex: 1; }
+    .mock-dm-name { font-size: 9.5px; font-weight: 700; color: var(--gold); margin-bottom: 3px; }
+    .mock-dm-msg { font-size: 8.5px; color: var(--text-2); line-height: 1.4; }
+    .mock-event { background: #181818; border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; padding: 10px; margin-bottom: 6px; display: flex; gap: 10px; align-items: center; }
+    .mock-date-block { background: rgba(201,162,39,0.15); border-radius: 6px; padding: 6px 8px; text-align: center; min-width: 36px; }
+    .mock-date-num { font-size: 14px; font-weight: 900; color: var(--gold); line-height: 1; }
+    .mock-date-mon { font-size: 7px; color: var(--gold); text-transform: uppercase; font-weight: 700; }
+    .mock-event-title { font-size: 10px; font-weight: 600; margin-bottom: 2px; }
+    .mock-event-sub { font-size: 8.5px; color: var(--text-3); }
+
+    /* Progress dots for app features */
+    .af-dots {
+      position: absolute;
+      right: -16px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    @media (max-width: 960px) {
+      .app-features-layout {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .app-mockup-wrap {
+        display: flex;
+        height: auto;
+        position: relative;
+        justify-content: center;
+      }
+      .af-mockup {
+        position: relative;
+        max-width: 100%;
+        transform: none !important;
+      }
+      .af-mockup.active { opacity: 1; transform: none; }
+      .mock-sidebar { display: none; }
+      .app-text-wrap { height: 320px; }
+      .app-features-sticky {
+        height: auto;
+        top: 60px;
+        align-items: flex-start;
+        padding: 20px 0 30px;
+        overflow-y: visible;
+      }
+      .af-desc { max-width: 100%; }
+    }
+
+    /* ============================================================
+       PRICING
+    ============================================================ */
+    .pricing-section { padding: 120px 0; }
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    .p-card {
+      background: var(--bg-1);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 36px 30px;
+      position: relative;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s ease;
+    }
+    .p-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.45);
+    }
+    .p-card.featured {
+      border-color: rgba(201,162,39,0.5);
+      background: linear-gradient(160deg, #120e04 0%, #0f0f0f 60%);
+      box-shadow: 0 0 0 1px rgba(201,162,39,0.2), inset 0 1px 0 rgba(201,162,39,0.15);
+    }
+    .p-card.featured:hover {
+      box-shadow: 0 0 0 1px rgba(201,162,39,0.4), 0 24px 64px rgba(201,162,39,0.15);
+    }
+    .p-best {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #000;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-lt) 100%);
+      padding: 5px 16px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .p-tier {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 10px;
+    }
+    .p-price-wrap { margin-bottom: 6px; }
+    .p-price {
+      font-size: 56px;
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 1;
+      color: var(--text);
+    }
+    .p-price sup {
+      font-size: 26px;
+      letter-spacing: -1px;
+      vertical-align: super;
+      font-weight: 700;
+    }
+    .p-period {
+      font-size: 12px;
+      color: var(--text-3);
+      margin-bottom: 28px;
+      line-height: 1.4;
+    }
+    .p-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin-bottom: 26px;
+    }
+    .p-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-bottom: 34px;
+    }
+    .p-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--text-2);
+      line-height: 1.5;
+    }
+    .p-features li .pf-check {
+      color: var(--gold);
+      font-size: 13px;
+      min-width: 14px;
+      margin-top: 2px;
+    }
+    .p-cta {
+      display: block;
+      text-align: center;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      letter-spacing: 0.1px;
+    }
+    .p-card:not(.featured) .p-cta {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .p-card:not(.featured) .p-cta:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .p-card.featured .p-cta {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 100%);
+      color: #000;
+      box-shadow: 0 4px 20px rgba(201,162,39,0.35);
+    }
+    .p-card.featured .p-cta:hover {
+      box-shadow: 0 8px 32px rgba(201,162,39,0.5);
+      transform: translateY(-1px);
+    }
+
+    /* ============================================================
+       1-ON-1 COACHING CTA
+    ============================================================ */
+    .coaching-section {
+      padding: 120px 0;
+      background: var(--bg-1);
+    }
+    .coaching-box {
+      background: linear-gradient(145deg, #0e0a02 0%, #111111 50%, #0a0a12 100%);
+      border: 1px solid rgba(201,162,39,0.22);
+      border-radius: 32px;
+      padding: 80px 64px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .coaching-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(201,162,39,0.13) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .coaching-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 22px;
+      padding: 7px 18px;
+      border: 1px solid rgba(201,162,39,0.28);
+      border-radius: 100px;
+      background: rgba(201,162,39,0.07);
+    }
+    .coaching-box h2 {
+      font-size: clamp(30px, 4.5vw, 52px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .coaching-box .sub {
+      font-size: 17px;
+      color: var(--text-2);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+    .spots-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      color: var(--text-2);
+      margin-bottom: 44px;
+    }
+    .spot-pulse {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #E63946;
+      box-shadow: 0 0 8px rgba(230,57,70,0.65);
+      animation: pulsate 2s ease-in-out infinite;
+    }
+    @keyframes pulsate {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+    .coaching-perks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 48px;
+      text-align: left;
+    }
+    .cp {
+      background: rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 22px 20px;
+    }
+    .cp .cp-icon { font-size: 26px; margin-bottom: 12px; }
+    .cp .cp-title { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+    .cp .cp-desc { font-size: 12.5px; color: var(--text-3); line-height: 1.55; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      padding: 48px 0 36px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+    }
+    .footer-logo {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 12.5px;
+      color: var(--text-3);
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-2); }
+    .footer-sep { color: var(--text-3); font-size: 11px; }
+    .footer-copy { font-size: 12px; color: var(--text-3); }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    /* ============================================================
+       CYCLING BUSINESS TYPE
+    ============================================================ */
+    .hero-biz-line {
+      display: block;
+      white-space: nowrap;
+    }
+    #biz-type {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 55%, #F5D675 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+      opacity: 0;
+    }
+    #biz-type.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #biz-type.fade-out {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    /* ============================================================
+       MAIN VIDEO SECTION
+    ============================================================ */
+    .main-video-section {
+      padding: 20px 0 80px;
+      background: var(--bg);
+    }
+    .main-video-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .main-video-label {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .main-video-label .section-eyebrow { margin-bottom: 10px; }
+    .main-video-label h2 {
+      font-size: clamp(24px, 3.5vw, 40px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+    .video-frame {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,162,39,0.1);
+      background: #000;
+      position: relative;
+    }
+    .video-frame .vimeo-wrapper {
+      padding: 56.25% 0 0 0;
+      position: relative;
+    }
+    .video-frame iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* ============================================================
+       TESTIMONIALS SECTION
+    ============================================================ */
+    .testimonials-section {
+      padding: 120px 0;
+      background: var(--bg);
+    }
+    .testimonials-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+    }
+    .t-card {
+      background: var(--bg-1);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s ease;
+    }
+    .t-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+      border-color: rgba(201,162,39,0.2);
+    }
+    .t-card:nth-child(1),
+    .t-card:nth-child(2),
+    .t-card:nth-child(3) { grid-column: span 2; }
+    .t-card:nth-child(4) { grid-column: 2 / 4; }
+    .t-card:nth-child(5) { grid-column: 4 / 6; }
+    .t-video-wrap {
+      padding: 56.25% 0 0 0;
+      position: relative;
+    }
+    .t-video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+      display: block;
+    }
+
+    @media (max-width: 960px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .t-card:nth-child(n) { grid-column: span 1; }
+    }
+
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .features-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto;
+        gap: 24px;
+      }
+      .feature-vis-wrap {
+        display: flex;
+        height: 180px;
+        order: -1;
+      }
+      .f-vis {
+        width: 160px;
+        height: 160px;
+        border-radius: 20px;
+      }
+      .f-vis-emoji { font-size: 56px; }
+      .f-vis-label { font-size: 15px; }
+      .feature-text-wrap { height: auto; min-height: 320px; }
+      .f-dots { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .coaching-perks { grid-template-columns: 1fr; }
+      .coaching-box { padding: 52px 28px; }
+      .about-achievements { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-item + .stat-item { border-left: none; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 28px; margin-top: 8px; }
+      .about-achievements { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Winners <span>Circle</span></a>
+    <div class="nav-links">
+      <a href="#about" class="nav-link">About John</a>
+      <a href="#pricing" class="nav-link">Membership</a>
+      <a href="https://winners-circle-portal-production.up.railway.app/" class="nav-link nav-link-app" target="_blank">Members App ↗</a>
+    </div>
+    <!-- ↓ Replace YOUR_APP_URL_HERE with your Winners Circle app URL -->
+    <a href="YOUR_APP_URL_HERE" class="nav-cta">Join Free</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mobile-menu-link">About John</a>
+  <a href="#pricing" class="mobile-menu-link">Membership</a>
+  <a href="https://winners-circle-portal-production.up.railway.app/" target="_blank" class="mobile-menu-link">Members App ↗</a>
+  <a href="YOUR_APP_URL_HERE" class="mobile-menu-cta">Join Free</a>
+</div>
+
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-pill reveal">For Entrepreneurs Who Want More</div>
+    <h1 class="reveal d1">
+      The Mindset &amp; Strategies<br>
+      to Grow Your<br>
+      <span class="hero-biz-line"><span id="biz-type"></span><span class="gradient-text"> Business</span></span>
+    </h1>
+    <p class="hero-sub reveal d2">
+      Join an elite group of entrepreneurs committed to massive growth, wise decision-making, and building a lasting legacy — for free.
+    </p>
+    <div class="hero-cta-group reveal d3">
+      <a href="YOUR_APP_URL_HERE" class="btn-primary">
+        Join the Circle — Free
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 7.5H12M12 7.5L8.5 4M12 7.5L8.5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#about" class="btn-ghost">Meet John →</a>
+    </div>
+    <div class="hero-social-proof reveal d4">
+      <span class="proof-stars">★★★★★</span>
+      <span>Trusted by 500+ entrepreneurs</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     MAIN VIDEO
+============================================================ -->
+<section class="main-video-section">
+  <div class="container">
+    <div class="main-video-wrap">
+      <div class="main-video-label reveal">
+        <div class="section-eyebrow">See It in Action</div>
+        <h2>Hear from John<br><span class="gold">himself</span>.</h2>
+      </div>
+      <div class="video-frame reveal d1">
+        <div class="vimeo-wrapper">
+          <iframe src="https://player.vimeo.com/video/1197128330?h=52408c6f3f&badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Winners Circle Main Video"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     STATS STRIP
+============================================================ -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num">$1B+</div>
+        <div class="stat-label">In Real Estate Sales</div>
+      </div>
+      <div class="stat-item reveal d1">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Members Growing Together</div>
+      </div>
+      <div class="stat-item reveal d2">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Years of Entrepreneurial Wisdom</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     FEATURES — APPLE-STYLE PINNED SCROLL
+============================================================ -->
+<section class="features-section">
+  <div class="features-intro">
+    <div class="section-eyebrow reveal">What You'll Gain</div>
+    <h2 class="section-title reveal d1">Four pillars.<br><span class="gold">One transformation.</span></h2>
+    <p class="section-sub reveal d2" style="margin:0 auto;">Everything you need to transform your mindset, scale your business, and live with purpose.</p>
+  </div>
+
+  <div class="features-track" id="featuresTrack">
+    <div class="features-sticky" id="featuresSticky">
+      <div class="container" style="position:relative;">
+        <div class="features-layout">
+
+          <!-- LEFT: Text Cards -->
+          <div class="feature-text-wrap">
+
+            <div class="f-card" id="fc0">
+              <div class="f-step">01 &nbsp;/&nbsp; 04</div>
+              <h3 class="f-title">Master Your<br>Mindset</h3>
+              <p class="f-desc">Your mindset is the foundation of everything you build. John challenges your perspective so you can unlock next-level growth.</p>
+              <ul class="f-bullets">
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Identify and shatter limiting beliefs
+                </li>
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Build an unshakeable belief in your potential
+                </li>
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Weekly challenges designed to expand your perspective
+                </li>
+              </ul>
+            </div>
+
+            <div class="f-card" id="fc1">
+              <div class="f-step">02 &nbsp;/&nbsp; 04</div>
+              <h3 class="f-title">Scale Your<br>Business</h3>
+              <p class="f-desc">Proven strategies to increase revenue, expand your market reach, and dominate your industry — from someone who did it.</p>
+              <ul class="f-bullets">
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Actionable growth frameworks from a 7-figure operator
+                </li>
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Live coaching and strategy sessions every month
+                </li>
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Real strategies — not theory, things that actually work
+                </li>
+              </ul>
+            </div>
+
+            <div class="f-card" id="fc2">
+              <div class="f-step">03 &nbsp;/&nbsp; 04</div>
+              <h3 class="f-title">Maximize Your<br>Income</h3>
+              <p class="f-desc">Build efficient systems that create sustainable, long-term financial success and the freedom to live on your own terms.</p>
+              <ul class="f-bullets">
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Systems and processes that scale without burnout
+                </li>
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Revenue stream clarity and business model optimization
+                </li>
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Financial discipline from someone who built it from zero
+                </li>
+              </ul>
+            </div>
+
+            <div class="f-card" id="fc3">
+              <div class="f-step">04 &nbsp;/&nbsp; 04</div>
+              <h3 class="f-title">Live With<br>Purpose</h3>
+              <p class="f-desc">True success is more than financial. Elevate every area of your life — health, relationships, legacy, and deep fulfillment.</p>
+              <ul class="f-bullets">
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Align your goals with your personal values
+                </li>
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  Health, relationships, and legacy — not just revenue
+                </li>
+                <li>
+                  <span class="bul-icon"><svg viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#C9A227" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  A community that holds you accountable to your whole life
+                </li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: Visual Cards -->
+          <div class="feature-vis-wrap">
+
+            <div class="f-vis" id="fv0" style="background: linear-gradient(145deg, #121008, #1a1608);">
+              <div class="f-vis-emoji">🧠</div>
+              <div class="f-vis-label">Mindset</div>
+            </div>
+
+            <div class="f-vis" id="fv1" style="background: linear-gradient(145deg, #081408, #0c1c0c);">
+              <div class="f-vis-emoji">🚀</div>
+              <div class="f-vis-label">Scale</div>
+            </div>
+
+            <div class="f-vis" id="fv2" style="background: linear-gradient(145deg, #0e0814, #16101e);">
+              <div class="f-vis-emoji">💰</div>
+              <div class="f-vis-label">Income</div>
+            </div>
+
+            <div class="f-vis" id="fv3" style="background: linear-gradient(145deg, #080e14, #0c1620);">
+              <div class="f-vis-emoji">⭐</div>
+              <div class="f-vis-label">Purpose</div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Scroll progress indicator -->
+        <div class="f-dots" id="fDots">
+          <div class="f-dot" data-i="0"></div>
+          <div class="f-dot" data-i="1"></div>
+          <div class="f-dot" data-i="2"></div>
+          <div class="f-dot" data-i="3"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     QUOTE
+============================================================ -->
+<div class="quote-section">
+  <div class="container">
+    <div class="big-quote reveal">
+      <span class="qmark">"</span>You must first believe you can win, then have the tools to make it happen. That's why I started this — to transfer the knowledge, mindset, and strategies that truly change lives.<span class="qmark">"</span>
+    </div>
+    <div class="quote-by reveal d1">— <strong>John Wentworth</strong>, Founder of The Winners Circle</div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     ABOUT JOHN
+============================================================ -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <img
+          src="john-wentworth.jpg"
+          alt="John Wentworth"
+          onerror="this.style.background='#181818'"
+        />
+        <div class="about-badge">
+          <div class="b-name">John Wentworth</div>
+          <div class="b-role">CEO, Wentworth Real Estate Group</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-eyebrow reveal">Meet Your Mentor</div>
+        <h2 class="section-title reveal d1">A Story of<br>Resilience &amp; Impact</h2>
+        <p class="about-quote-line reveal d2">
+          <em>"My mission is clear — develop people &amp; change lives."</em>
+        </p>
+        <p class="about-body reveal d2">
+          At 35, John went from completely broke to building a 7-figure net income business from the ground up. His journey — through childhood trauma, battling addiction, and reclaiming his life through sobriety — shaped a leader defined by transparency, heart, and zero BS.
+        </p>
+        <p class="about-body reveal d3">
+          Today, as CEO of the #1 Independent Large Team Brokerage in Michigan with over $1 billion in sales, John leads a team of 100+ professionals while mentoring entrepreneurs to reach their full potential.
+        </p>
+        <div class="about-achievements reveal d3">
+          <div class="achiev">
+            <div class="a-num">$1B+</div>
+            <div class="a-label">Total Sales Volume</div>
+          </div>
+          <div class="achiev">
+            <div class="a-num">#1</div>
+            <div class="a-label">Independent Brokerage in Michigan</div>
+          </div>
+          <div class="achiev">
+            <div class="a-num">100+</div>
+            <div class="a-label">Professionals on His Team</div>
+          </div>
+          <div class="achiev">
+            <div class="a-num">20yr</div>
+            <div class="a-label">Entrepreneurial Experience</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     APP FEATURES
+============================================================ -->
+<section class="app-features-section" id="app-features">
+  <div class="app-features-intro">
+    <div class="section-eyebrow reveal">The Members App</div>
+    <h2 class="section-title reveal d1">Everything in one<br><span class="gold">powerful platform</span>.</h2>
+    <p class="section-sub reveal d2" style="margin:0 auto;">The Winners Circle app puts your entire growth system in your pocket — challenges, courses, community, and direct access to John.</p>
+  </div>
+
+  <div class="app-features-track" id="appFeaturesTrack">
+    <div class="app-features-sticky">
+      <div class="container" style="position:relative;">
+        <div class="app-features-layout">
+
+          <!-- LEFT: Text cards -->
+          <div class="app-text-wrap">
+
+            <div class="af-card" id="afc0">
+              <div class="af-step">01 &nbsp;/&nbsp; 06</div>
+              <h3 class="af-title">🎯 Challenges</h3>
+              <p class="af-desc">Stay consistent and earn XP by completing structured challenges. Track streaks, unlock badges, and compete on the leaderboard — accountability built in.</p>
+              <div class="af-tag">⚡ Earn XP &amp; unlock badges</div>
+            </div>
+
+            <div class="af-card" id="afc1">
+              <div class="af-step">02 &nbsp;/&nbsp; 06</div>
+              <h3 class="af-title">📚 Free Resources</h3>
+              <p class="af-desc">Access a growing library of templates, guides, playbooks, and session recordings — organized by category so you can find exactly what you need, when you need it.</p>
+              <div class="af-tag">📂 Templates, guides &amp; replays</div>
+            </div>
+
+            <div class="af-card" id="afc2">
+              <div class="af-step">03 &nbsp;/&nbsp; 06</div>
+              <h3 class="af-title">🎓 Courses</h3>
+              <p class="af-desc">Deep-dive video courses built for high-performers. Track your progress, complete lessons at your own pace, and build real skills that move the needle in your business.</p>
+              <div class="af-tag">🎬 Video lessons with progress tracking</div>
+            </div>
+
+            <div class="af-card" id="afc3">
+              <div class="af-step">04 &nbsp;/&nbsp; 06</div>
+              <h3 class="af-title">💬 Community</h3>
+              <p class="af-desc">Connect in topic-specific channels — #wins, #accountability, #hot-seat, #real-estate, and more. Share breakthroughs, ask questions, and build relationships with fellow winners.</p>
+              <div class="af-tag">🏆 7 channels including #founders-lounge</div>
+            </div>
+
+            <div class="af-card" id="afc4">
+              <div class="af-step">05 &nbsp;/&nbsp; 06</div>
+              <h3 class="af-title">✉️ Direct Messages</h3>
+              <p class="af-desc">Message any member directly — including John. Get real-time feedback, celebrate wins together, and stay connected with your network between live sessions.</p>
+              <div class="af-tag">💬 DM members &amp; John directly</div>
+            </div>
+
+            <div class="af-card" id="afc5">
+              <div class="af-step">06 &nbsp;/&nbsp; 06</div>
+              <h3 class="af-title">📅 Live Events</h3>
+              <p class="af-desc">Join live Zoom calls, hot seat coaching sessions, and group calls — all scheduled inside the app. Miss one? Every session is recorded and available on demand.</p>
+              <div class="af-tag">🔴 Live sessions + on-demand replays</div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT: App mockups -->
+          <div class="app-mockup-wrap">
+
+            <!-- Challenges -->
+            <div class="af-mockup" id="afm0">
+              <div class="mock-browser">
+                <div class="mock-bar"><div class="mock-dots"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div><div class="mock-url">winners-circle-portal.up.railway.app/challenges</div></div>
+                <div class="mock-body">
+                  <div class="mock-sidebar">
+                    <div class="mock-logo">🏆 WC</div>
+                    <div class="mock-nav-item">🏠 Home</div>
+                    <div class="mock-nav-item">💬 Community</div>
+                    <div class="mock-nav-item">🎓 Courses</div>
+                    <div class="mock-nav-item">📅 Events</div>
+                    <div class="mock-nav-item">📚 Resources</div>
+                    <div class="mock-nav-item">✉️ Messages</div>
+                    <div class="mock-nav-item active-nav">🎯 Challenges</div>
+                  </div>
+                  <div class="mock-content">
+                    <div class="mock-page-title">🎯 Challenges</div>
+                    <div class="mock-stats">
+                      <div class="mock-stat"><div class="mock-stat-num">1</div><div class="mock-stat-lbl">ACTIVE</div></div>
+                      <div class="mock-stat"><div class="mock-stat-num">0</div><div class="mock-stat-lbl">DONE</div></div>
+                      <div class="mock-stat"><div class="mock-stat-num">300</div><div class="mock-stat-lbl">TOTAL XP</div></div>
+                    </div>
+                    <div class="mock-card">
+                      <div class="mock-badge gold">⚡ IN PROGRESS</div>
+                      <div class="mock-card-title">10 Day Pushup Challenge</div>
+                      <div class="mock-card-sub">+100 XP · 📅 10 days · 3/10 checked in</div>
+                      <div class="mock-progress-bar"><div class="mock-progress-fill" style="width:30%"></div></div>
+                    </div>
+                    <div class="mock-card">
+                      <div class="mock-badge blue">🔜 UPCOMING</div>
+                      <div class="mock-card-title">30 Day Revenue Challenge</div>
+                      <div class="mock-card-sub">+500 XP · Starts June 1</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Resources -->
+            <div class="af-mockup" id="afm1">
+              <div class="mock-browser">
+                <div class="mock-bar"><div class="mock-dots"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div><div class="mock-url">winners-circle-portal.up.railway.app/resources</div></div>
+                <div class="mock-body">
+                  <div class="mock-sidebar">
+                    <div class="mock-logo">🏆 WC</div>
+                    <div class="mock-nav-item">🏠 Home</div>
+                    <div class="mock-nav-item">💬 Community</div>
+                    <div class="mock-nav-item">🎓 Courses</div>
+                    <div class="mock-nav-item">📅 Events</div>
+                    <div class="mock-nav-item active-nav">📚 Resources</div>
+                    <div class="mock-nav-item">✉️ Messages</div>
+                    <div class="mock-nav-item">🎯 Challenges</div>
+                  </div>
+                  <div class="mock-content">
+                    <div class="mock-page-title">📚 Resource Library</div>
+                    <div class="mock-tabs">
+                      <div class="mock-tab active-tab">All</div>
+                      <div class="mock-tab">Mindset</div>
+                      <div class="mock-tab">Business</div>
+                      <div class="mock-tab">Real Estate</div>
+                      <div class="mock-tab">Templates</div>
+                      <div class="mock-tab">Replays</div>
+                    </div>
+                    <div class="mock-card"><div class="mock-card-title">📄 Sales Script Template</div><div class="mock-card-sub">Templates &amp; Toolkits · PDF</div></div>
+                    <div class="mock-card"><div class="mock-card-title">🧠 Mindset Reset Guide</div><div class="mock-card-sub">Mindset &amp; Performance · Guide</div></div>
+                    <div class="mock-card"><div class="mock-card-title">🏠 RE Buyer Checklist</div><div class="mock-card-sub">Real Estate · Template</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Courses -->
+            <div class="af-mockup" id="afm2">
+              <div class="mock-browser">
+                <div class="mock-bar"><div class="mock-dots"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div><div class="mock-url">winners-circle-portal.up.railway.app/courses</div></div>
+                <div class="mock-body">
+                  <div class="mock-sidebar">
+                    <div class="mock-logo">🏆 WC</div>
+                    <div class="mock-nav-item">🏠 Home</div>
+                    <div class="mock-nav-item">💬 Community</div>
+                    <div class="mock-nav-item active-nav">🎓 Courses</div>
+                    <div class="mock-nav-item">📅 Events</div>
+                    <div class="mock-nav-item">📚 Resources</div>
+                    <div class="mock-nav-item">✉️ Messages</div>
+                    <div class="mock-nav-item">🎯 Challenges</div>
+                  </div>
+                  <div class="mock-content">
+                    <div class="mock-page-title">🎓 Courses</div>
+                    <div class="mock-card">
+                      <div class="mock-badge gold">Core+</div>
+                      <div class="mock-card-title">Real Estate Master Course</div>
+                      <div class="mock-card-sub">2 lessons · John Wentworth</div>
+                      <div class="mock-progress-bar"><div class="mock-progress-fill" style="width:100%"></div></div>
+                      <div style="font-size:8.5px;color:#28C840;margin-top:5px;">✓ Complete</div>
+                    </div>
+                    <div class="mock-card">
+                      <div class="mock-badge blue">Coming Soon</div>
+                      <div class="mock-card-title">Mindset Mastery Series</div>
+                      <div class="mock-card-sub">6 lessons · Launching June 2025</div>
+                      <div class="mock-progress-bar"><div class="mock-progress-fill" style="width:0%"></div></div>
+                    </div>
+                    <div class="mock-card">
+                      <div class="mock-badge blue">Coming Soon</div>
+                      <div class="mock-card-title">Sales &amp; Lead Generation</div>
+                      <div class="mock-card-sub">8 lessons · Launching Q3 2025</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Community -->
+            <div class="af-mockup" id="afm3">
+              <div class="mock-browser">
+                <div class="mock-bar"><div class="mock-dots"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div><div class="mock-url">winners-circle-portal.up.railway.app/community</div></div>
+                <div class="mock-body">
+                  <div class="mock-sidebar">
+                    <div class="mock-logo">🏆 WC</div>
+                    <div class="mock-nav-item">🏠 Home</div>
+                    <div class="mock-nav-item active-nav">💬 Community</div>
+                    <div class="mock-nav-item">🎓 Courses</div>
+                    <div class="mock-nav-item">📅 Events</div>
+                    <div class="mock-nav-item">📚 Resources</div>
+                    <div class="mock-nav-item">✉️ Messages</div>
+                    <div class="mock-nav-item">🎯 Challenges</div>
+                  </div>
+                  <div class="mock-content">
+                    <div class="mock-channels">
+                      <div class="mock-channel active-ch"># general</div>
+                      <div class="mock-channel"># wins</div>
+                      <div class="mock-channel"># accountability</div>
+                      <div class="mock-channel"># hot-seat</div>
+                      <div class="mock-channel"># founders-lounge</div>
+                      <div class="mock-channel"># real-estate</div>
+                    </div>
+                    <div class="mock-post"><div class="mock-post-header"><div class="mock-avatar">JW</div><div class="mock-post-name">John Wentworth <span style="color:var(--text-3);font-weight:400;">· Founding</span></div></div><div class="mock-post-text">Big week everyone — remember why you started. Your consistency is your edge. 🏆</div></div>
+                    <div class="mock-post"><div class="mock-post-header"><div class="mock-avatar" style="background:#60a5fa;">L</div><div class="mock-post-name">Luke <span style="color:var(--text-3);font-weight:400;">· Member</span></div></div><div class="mock-post-text">Closed my biggest deal yet this week. This community is 🔥</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- DMs -->
+            <div class="af-mockup" id="afm4">
+              <div class="mock-browser">
+                <div class="mock-bar"><div class="mock-dots"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div><div class="mock-url">winners-circle-portal.up.railway.app/messages</div></div>
+                <div class="mock-body">
+                  <div class="mock-sidebar">
+                    <div class="mock-logo">🏆 WC</div>
+                    <div class="mock-nav-item">🏠 Home</div>
+                    <div class="mock-nav-item">💬 Community</div>
+                    <div class="mock-nav-item">🎓 Courses</div>
+                    <div class="mock-nav-item">📅 Events</div>
+                    <div class="mock-nav-item">📚 Resources</div>
+                    <div class="mock-nav-item active-nav">✉️ Messages</div>
+                    <div class="mock-nav-item">🎯 Challenges</div>
+                  </div>
+                  <div class="mock-content">
+                    <div class="mock-page-title">✉️ Messages</div>
+                    <div class="mock-dm">
+                      <div class="mock-avatar">JW</div>
+                      <div class="mock-dm-body"><div class="mock-dm-name">John Wentworth</div><div class="mock-dm-msg">"Luke, love seeing you stay consistent with the lessons and check-ins — that's how real progress happens. Keep that momentum going, brother."</div></div>
+                    </div>
+                    <div class="mock-dm">
+                      <div class="mock-avatar" style="background:#60a5fa;">C</div>
+                      <div class="mock-dm-body"><div class="mock-dm-name">Christian Wentworth</div><div class="mock-dm-msg">Hey! Are you coming to the live call on Wednesday? Would love to connect.</div></div>
+                    </div>
+                    <div class="mock-dm">
+                      <div class="mock-avatar" style="background:#a78bfa;">M</div>
+                      <div class="mock-dm-body"><div class="mock-dm-name">Mike R.</div><div class="mock-dm-msg">Thanks for the referral — just closed! 🙌</div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Live Events -->
+            <div class="af-mockup" id="afm5">
+              <div class="mock-browser">
+                <div class="mock-bar"><div class="mock-dots"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div><div class="mock-url">winners-circle-portal.up.railway.app/events</div></div>
+                <div class="mock-body">
+                  <div class="mock-sidebar">
+                    <div class="mock-logo">🏆 WC</div>
+                    <div class="mock-nav-item">🏠 Home</div>
+                    <div class="mock-nav-item">💬 Community</div>
+                    <div class="mock-nav-item">🎓 Courses</div>
+                    <div class="mock-nav-item active-nav">📅 Events</div>
+                    <div class="mock-nav-item">📚 Resources</div>
+                    <div class="mock-nav-item">✉️ Messages</div>
+                    <div class="mock-nav-item">🎯 Challenges</div>
+                  </div>
+                  <div class="mock-content">
+                    <div class="mock-page-title">📅 Live Sessions</div>
+                    <div class="mock-event">
+                      <div class="mock-date-block"><div class="mock-date-num">02</div><div class="mock-date-mon">JUN</div></div>
+                      <div><div class="mock-event-title">Weekly Mindset Call</div><div class="mock-event-sub">Monday 6:30pm ET · 60 min · Zoom</div></div>
+                    </div>
+                    <div class="mock-event">
+                      <div class="mock-date-block"><div class="mock-date-num">11</div><div class="mock-date-mon">JUN</div></div>
+                      <div><div class="mock-event-title">Group Marketing Call</div><div class="mock-event-sub">Wednesday 12pm ET · Elevate Members</div></div>
+                    </div>
+                    <div class="mock-event">
+                      <div class="mock-date-block" style="background:rgba(255,255,255,0.05)"><div class="mock-date-num" style="color:var(--text-3)">22</div><div class="mock-date-mon" style="color:var(--text-3)">MAY</div></div>
+                      <div><div class="mock-event-title">Mindset Masters Call</div><div class="mock-event-sub" style="color:var(--gold)">🎬 Recording available</div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Progress dots -->
+          <div class="af-dots" id="afDots">
+            <div class="f-dot" data-af="0"></div>
+            <div class="f-dot" data-af="1"></div>
+            <div class="f-dot" data-af="2"></div>
+            <div class="f-dot" data-af="3"></div>
+            <div class="f-dot" data-af="4"></div>
+            <div class="f-dot" data-af="5"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     PRICING
+============================================================ -->
+<section class="pricing-section" id="pricing">
+  <div class="container">
+    <div class="pricing-header">
+      <div class="section-eyebrow reveal">Membership</div>
+      <h2 class="section-title reveal d1">Choose your level<br>of <span class="gold">commitment</span>.</h2>
+      <p class="section-sub reveal d2" style="margin:0 auto;">Start free. Scale when you're ready. No contracts — cancel anytime.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- FREE -->
+      <div class="p-card reveal">
+        <div class="p-tier">Free</div>
+        <div class="p-price-wrap">
+          <span class="p-price"><sup>$</sup>0</span>
+        </div>
+        <div class="p-period">Forever free &nbsp;·&nbsp; Unlimited seats</div>
+        <div class="p-divider"></div>
+        <ul class="p-features">
+          <li><span class="pf-check">✦</span> 2 weekly Zoom lessons per month with John</li>
+          <li><span class="pf-check">✦</span> Access to private Facebook community</li>
+          <li><span class="pf-check">✦</span> Member referral and connection network</li>
+          <li><span class="pf-check">✦</span> Live Monday sessions at 6:30pm ET</li>
+        </ul>
+        <a href="YOUR_APP_URL_HERE" class="p-cta">Join for Free</a>
+      </div>
+
+      <!-- ELEVATE — FEATURED -->
+      <div class="p-card featured reveal d1">
+        <div class="p-best">Best Value</div>
+        <div class="p-tier">Elevate</div>
+        <div class="p-price-wrap">
+          <span class="p-price"><sup>$</sup>495</span>
+        </div>
+        <div class="p-period">/ month &nbsp;·&nbsp; Limited to 10 people</div>
+        <div class="p-divider"></div>
+        <ul class="p-features">
+          <li><span class="pf-check">✦</span> Everything in Core membership</li>
+          <li><span class="pf-check">✦</span> 2 additional live group calls per month</li>
+          <li><span class="pf-check">✦</span> Group Marketing Call — branding, leads &amp; offers</li>
+          <li><span class="pf-check">✦</span> Group Coaching Call — live Q&amp;A with John</li>
+          <li><span class="pf-check">✦</span> Hot seat coaching with elite peers</li>
+        </ul>
+        <a href="YOUR_APP_URL_HERE" class="p-cta">Join Elevate</a>
+      </div>
+
+      <!-- CORE -->
+      <div class="p-card reveal d2">
+        <div class="p-tier">Core</div>
+        <div class="p-price-wrap">
+          <span class="p-price"><sup>$</sup>150</span>
+        </div>
+        <div class="p-period">/ month</div>
+        <div class="p-divider"></div>
+        <ul class="p-features">
+          <li><span class="pf-check">✦</span> 4 Zoom lessons per month</li>
+          <li><span class="pf-check">✦</span> 1 special guest call per month</li>
+          <li><span class="pf-check">✦</span> Unlimited replay access — watch anytime</li>
+          <li><span class="pf-check">✦</span> Free member-only exclusive events</li>
+          <li><span class="pf-check">✦</span> Winners Circle swag</li>
+        </ul>
+        <a href="YOUR_APP_URL_HERE" class="p-cta">Join Foundation</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     TESTIMONIALS
+============================================================ -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="section-eyebrow reveal">Member Testimonials</div>
+      <h2 class="section-title reveal d1">Real people.<br><span class="gold">Real results.</span></h2>
+      <p class="section-sub reveal d2" style="margin:0 auto;">Hear directly from Winners Circle members about what this community has done for their business and life.</p>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="t-card reveal">
+        <div class="t-video-wrap">
+          <iframe src="https://player.vimeo.com/video/1197128238?h=f5f60bc0ea&badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Testimonial 1"></iframe>
+        </div>
+      </div>
+
+      <div class="t-card reveal d1">
+        <div class="t-video-wrap">
+          <iframe src="https://player.vimeo.com/video/1197128239?h=6957195b53&badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Testimonial 2"></iframe>
+        </div>
+      </div>
+
+      <div class="t-card reveal d2">
+        <div class="t-video-wrap">
+          <iframe src="https://player.vimeo.com/video/1197128375?h=3ebb88ddb2&badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Testimonial 3"></iframe>
+        </div>
+      </div>
+
+      <div class="t-card reveal d1">
+        <div class="t-video-wrap">
+          <iframe src="https://player.vimeo.com/video/1197128241?h=56144d82c4&badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Testimonial 4"></iframe>
+        </div>
+      </div>
+
+      <div class="t-card reveal d2">
+        <div class="t-video-wrap">
+          <iframe src="https://player.vimeo.com/video/1197128240?h=301a6d0ca2&badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Testimonial 5"></iframe>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     1-ON-1 COACHING CTA
+============================================================ -->
+<section class="coaching-section">
+  <div class="container">
+    <div class="coaching-box reveal">
+      <div class="coaching-tag">1-on-1 Coaching</div>
+      <h2>Direct Access to John.<br><span class="gold">Accelerate Everything.</span></h2>
+      <p class="sub">Personalized coaching from a 7-figure entrepreneur who built it from nothing. Real strategies, accountability, and a custom plan built around your specific goals.</p>
+      <div class="spots-line">
+        <div class="spot-pulse"></div>
+        Only 1 spot currently available
+      </div>
+      <div class="coaching-perks">
+        <div class="cp">
+          <div class="cp-icon">📅</div>
+          <div class="cp-title">Weekly 30-Min Sessions</div>
+          <div class="cp-desc">Focused, actionable strategy tailored to your challenges and opportunities</div>
+        </div>
+        <div class="cp">
+          <div class="cp-icon">📲</div>
+          <div class="cp-title">Direct Access to John</div>
+          <div class="cp-desc">In-the-trenches support and guidance throughout the entire week</div>
+        </div>
+        <div class="cp">
+          <div class="cp-icon">🗺️</div>
+          <div class="cp-title">Custom Strategic Map</div>
+          <div class="cp-desc">A personalized plan that aligns with your vision and drives real growth</div>
+        </div>
+      </div>
+      <a href="YOUR_APP_URL_HERE" class="btn-primary" style="font-size:16px; padding:18px 48px;">
+        Apply for 1-on-1 Coaching
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 7.5H12M12 7.5L8.5 4M12 7.5L8.5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">The Winners <span>Circle</span></div>
+      <div class="footer-links">
+        <a href="#">Terms &amp; Conditions</a>
+        <span class="footer-sep">·</span>
+        <a href="#">Privacy Policy</a>
+        <span class="footer-sep">·</span>
+        <a href="YOUR_APP_URL_HERE">Join Now</a>
+      </div>
+      <div class="footer-copy">© The Winners Circle · All Rights Reserved</div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  // ---- App Features scroll ----
+  const afTrack   = document.getElementById('appFeaturesTrack');
+  const afDots    = document.querySelectorAll('[data-af]');
+  let afCurrent   = -1;
+
+  function setAppFeature(idx) {
+    if (idx === afCurrent) return;
+    const prev = afCurrent;
+    afCurrent = idx;
+    for (let i = 0; i < 6; i++) {
+      const tc = document.getElementById('afc' + i);
+      const mc = document.getElementById('afm' + i);
+      if (i === idx) {
+        tc.className = 'af-card active';
+        if (mc) mc.className = 'af-mockup active';
+      } else if (i === prev) {
+        tc.className = 'af-card exit';
+        if (mc) mc.className = 'af-mockup';
+        setTimeout(() => { if (tc.className === 'af-card exit') tc.className = 'af-card'; }, 550);
+      } else {
+        tc.className = 'af-card';
+        if (mc) mc.className = 'af-mockup';
+      }
+    }
+    afDots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  setAppFeature(0);
+
+  window.addEventListener('scroll', () => {
+    if (!afTrack) return;
+    const rect     = afTrack.getBoundingClientRect();
+    const trackH   = afTrack.offsetHeight;
+    const scrolled = -rect.top;
+    if (scrolled < 0 || scrolled > trackH - window.innerHeight) return;
+    const progress = scrolled / (trackH - window.innerHeight);
+    const idx      = Math.min(5, Math.floor(progress * 6));
+    setAppFeature(idx);
+  }, { passive: true });
+
+  afDots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      const i    = parseInt(dot.dataset.af);
+      const rect = afTrack.getBoundingClientRect();
+      const target = window.scrollY + rect.top + (i / 6) * (afTrack.offsetHeight - window.innerHeight) + 4;
+      window.scrollTo({ top: target, behavior: 'smooth' });
+    });
+  });
+
+  // ---- Cycling business type ----
+  const bizTypes = [
+    'Real Estate', 'Roofing', 'Coffee', 'Restaurant', 'Consulting',
+    'Fitness', 'Marketing', 'Landscaping', 'Tech', 'Construction',
+    'Financial', 'Healthcare'
+  ];
+  const bizEl = document.getElementById('biz-type');
+  let bizIndex = 0;
+
+  function cycleBiz() {
+    // Fade out
+    bizEl.classList.remove('fade-in');
+    bizEl.classList.add('fade-out');
+
+    setTimeout(() => {
+      bizEl.textContent = bizTypes[bizIndex];
+      bizIndex = (bizIndex + 1) % bizTypes.length;
+      // Fade in
+      bizEl.classList.remove('fade-out');
+      bizEl.classList.add('fade-in');
+    }, 600);
+  }
+
+  // Start after a short delay so hero animation plays first
+  setTimeout(() => {
+    cycleBiz();
+    setInterval(cycleBiz, 2600);
+  }, 1400);
+
+  // ---- Mobile hamburger menu ----
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  // Close on link click
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ---- Nav scroll effect ----
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ---- Intersection Observer: scroll-reveal ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // ---- Apple-style pinned feature scroll ----
+  const track   = document.getElementById('featuresTrack');
+  const dots    = document.querySelectorAll('.f-dot');
+  let current   = -1;
+
+  function setFeature(idx) {
+    if (idx === current) return;
+    const prev = current;
+    current = idx;
+
+    for (let i = 0; i < 4; i++) {
+      const tc = document.getElementById('fc' + i);
+      const vc = document.getElementById('fv' + i);
+      if (i === idx) {
+        tc.className = 'f-card active';
+        vc.className = 'f-vis active';
+      } else if (i === prev) {
+        tc.className = 'f-card exit';
+        vc.className = 'f-vis';
+        setTimeout(() => { if (tc.className === 'f-card exit') tc.className = 'f-card'; }, 550);
+      } else {
+        tc.className = 'f-card';
+        vc.className = 'f-vis';
+      }
+    }
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+
+  // Init
+  setFeature(0);
+
+  window.addEventListener('scroll', () => {
+    const rect        = track.getBoundingClientRect();
+    const trackH      = track.offsetHeight;
+    const scrolled    = -rect.top;
+    if (scrolled < 0 || scrolled > trackH - window.innerHeight) return;
+    const progress    = scrolled / (trackH - window.innerHeight);
+    const idx         = Math.min(3, Math.floor(progress * 4));
+    setFeature(idx);
+  }, { passive: true });
+
+  // Dot click → jump to that feature
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      const rect   = track.getBoundingClientRect();
+      const trackH = track.offsetHeight;
+      const target = window.scrollY + rect.top + (i / 4) * (trackH - window.innerHeight) + 4;
+      window.scrollTo({ top: target, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
