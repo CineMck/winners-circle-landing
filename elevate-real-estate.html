@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A free live Zoom mastermind for real estate agents, brokers, and team leaders. Hosted by John Wentworth — $1B+ in real estate sales. Limited seats." />
+  <meta name="theme-color" content="#080808" />
+  <title>The Winners Circle — Elevate Real Estate Free Mastermind</title>
+  <link rel="canonical" href="https://winners-circle-landing-production.up.railway.app/elevate-real-estate" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Elevate Real Estate — Free Zoom Mastermind with John Wentworth" />
+  <meta property="og:description" content="One live Zoom mastermind built for real estate agents, brokers, and team leaders ready to scale. Free. Limited seats." />
+  <meta property="og:url" content="https://winners-circle-landing-production.up.railway.app/elevate-real-estate" />
+  <meta property="og:image" content="https://winners-circle-landing-production.up.railway.app/john-wentworth.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Elevate Real Estate — Free Zoom Mastermind with John Wentworth" />
+  <meta name="twitter:description" content="Free live Zoom mastermind for real estate pros. Limited seats." />
+  <meta name="twitter:image" content="https://winners-circle-landing-production.up.railway.app/john-wentworth.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://player.vimeo.com/api/player.js" defer></script>
+
+  <style>
+    /* ============================================================
+       RESET + VARIABLES
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080808;
+      --bg-1:      #0f0f0f;
+      --bg-2:      #181818;
+      --bg-3:      #222222;
+      --gold:      #C9A227;
+      --gold-lt:   #E8C84A;
+      --gold-dk:   #9A7A18;
+      --gold-glow: rgba(201,162,39,0.18);
+      --gold-dim:  rgba(201,162,39,0.10);
+      --text:      #FFFFFF;
+      --text-2:    #9A9A9A;
+      --text-3:    #555555;
+      --radius:    20px;
+      --ease:      cubic-bezier(0.16,1,0.3,1);
+
+      /* RE-specific accent: deep architectural navy used sparingly to distinguish this page */
+      --re-navy:   #0A1A2E;
+      --re-navy-2: #14253D;
+      --re-line:   rgba(122,165,217,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
+    .gold { color: var(--gold); }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-size: clamp(30px, 4.5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-2);
+      line-height: 1.65;
+      max-width: 560px;
+    }
+
+    /* Scroll-reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.85s var(--ease), transform 0.85s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+
+    /* ============================================================
+       URGENCY BAR (RE-specific)
+    ============================================================ */
+    .urgency-bar {
+      background: linear-gradient(90deg, var(--re-navy) 0%, var(--re-navy-2) 50%, var(--re-navy) 100%);
+      border-bottom: 1px solid rgba(201,162,39,0.18);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 201;
+      padding: 10px 16px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--text);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+    .urgency-bar strong { color: var(--gold); font-weight: 700; }
+    .urgency-bar .countdown {
+      display: inline-block;
+      margin-left: 10px;
+      padding: 3px 10px;
+      background: rgba(201,162,39,0.12);
+      border: 1px solid rgba(201,162,39,0.30);
+      border-radius: 100px;
+      font-size: 12px;
+      color: var(--gold);
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+    }
+    @media (max-width: 640px) {
+      .urgency-bar { font-size: 12px; padding: 9px 12px; }
+      .urgency-bar .countdown { display: block; margin: 6px auto 0; width: fit-content; }
+    }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #nav {
+      position: fixed;
+      top: 38px; left: 0; right: 0;
+      z-index: 200;
+      padding: 18px 0;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, padding 0.4s ease, border-color 0.4s ease, top 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    #nav.scrolled {
+      padding: 12px 0;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-color: rgba(255,255,255,0.07);
+    }
+    @media (max-width: 640px) {
+      #nav { top: 60px; }
+      #nav.scrolled { top: 60px; }
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    .nav-logo {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-link {
+      font-size: 14px;
+      color: var(--text-2);
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 100px;
+      transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-link:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .nav-link-app { color: var(--gold) !important; border: 1px solid rgba(201,162,39,0.3); border-radius: 100px; }
+    .nav-link-app:hover { background: rgba(201,162,39,0.08); }
+    .nav-cta {
+      background: var(--gold);
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 20px;
+      border-radius: 100px;
+      text-decoration: none;
+      letter-spacing: 0.2px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .nav-cta:hover { background: var(--gold-lt); transform: scale(1.03); }
+    .nav-cta:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      z-index: 202;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s var(--ease);
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 199;
+      background: rgba(8,8,8,0.97);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.35s var(--ease), transform 0.35s var(--ease);
+    }
+    .mobile-menu.open { opacity: 1; transform: translateY(0); }
+    .mobile-menu a {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 16px;
+      transition: color 0.2s, background 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); background: rgba(201,162,39,0.07); }
+    .mobile-menu .mobile-menu-cta {
+      margin-top: 16px;
+      background: var(--gold);
+      color: #000;
+      font-size: 17px;
+      padding: 14px 36px;
+      border-radius: 100px;
+    }
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .mobile-menu { display: flex; }
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 180px 28px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (max-width: 640px) {
+      .hero { padding: 200px 24px 48px; }
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 100% 70% at 50% -10%, rgba(201,162,39,0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 50% at 50% 100%, rgba(20,37,61,0.55) 0%, transparent 70%);
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 200px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+    }
+    /* Blueprint grid lines — distinct from index.html's plain grid */
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--re-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--re-line) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 240px 240px, 240px 240px, 60px 60px, 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 30%, black 40%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 30%, black 40%, transparent 80%);
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      padding: 7px 18px;
+      border: 1px solid rgba(201,162,39,0.28);
+      border-radius: 100px;
+      background: rgba(201,162,39,0.07);
+    }
+    .hero-pill::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 6px var(--gold);
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 900;
+      line-height: 1.04;
+      letter-spacing: -2.5px;
+      margin-bottom: 22px;
+      max-width: 880px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 55%, #F5D675 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: var(--text-2);
+      font-weight: 400;
+      line-height: 1.65;
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: var(--gold);
+      color: #000;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 16px 36px;
+      border-radius: 100px;
+      text-decoration: none;
+      letter-spacing: 0.1px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 0 0 rgba(201,162,39,0);
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-primary:hover {
+      background: var(--gold-lt);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 48px rgba(201,162,39,0.42);
+    }
+    .btn-primary:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-2);
+      font-size: 15px;
+      font-weight: 500;
+      padding: 16px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.11);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.28); color: var(--text); }
+    .btn-ghost:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .hero-reassure {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--text-3);
+      font-size: 12.5px;
+      letter-spacing: 0.3px;
+    }
+    .hero-reassure span { display: inline-flex; align-items: center; gap: 6px; }
+    .hero-reassure span::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       SOCIAL PROOF STRIP
+    ============================================================ */
+    .stats-strip {
+      background: var(--bg-1);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 48px 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .stat-item {
+      text-align: center;
+      padding: 8px 24px;
+    }
+    .stat-item + .stat-item {
+      border-left: 1px solid rgba(255,255,255,0.07);
+    }
+    .stat-num {
+      font-size: clamp(34px, 4.6vw, 52px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1;
+      color: var(--gold);
+    }
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-3);
+      font-weight: 500;
+      margin-top: 7px;
+      letter-spacing: 0.3px;
+    }
+    @media (max-width: 680px) {
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-item + .stat-item { border-left: none; border-top: 1px solid rgba(255,255,255,0.07); padding-top: 24px; margin-top: 8px; }
+    }
+
+    /* ============================================================
+       LEARN / TAKEAWAYS
+    ============================================================ */
+    .learn-section { padding: 110px 0 80px; }
+    .learn-header { text-align: center; margin-bottom: 56px; }
+    .learn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .l-card {
+      background: var(--bg-1);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 28px 24px;
+      transition: transform 0.3s var(--ease), border-color 0.3s ease, box-shadow 0.3s var(--ease);
+    }
+    .l-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(201,162,39,0.28);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+    }
+    .l-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(201,162,39,0.3);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+    .l-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+    .l-desc {
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+    @media (max-width: 880px) {
+      .learn-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .learn-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       HOST SECTION
+    ============================================================ */
+    .host-section {
+      padding: 90px 0;
+      background: var(--bg-1);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .host-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .host-photo-wrap {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(201,162,39,0.18);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+    }
+    .host-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      aspect-ratio: 4 / 5;
+    }
+    .host-photo-tag {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      background: rgba(8,8,8,0.86);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(201,162,39,0.24);
+      border-radius: 100px;
+      padding: 7px 14px;
+      font-size: 12px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .host-content h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .host-quote {
+      font-style: italic;
+      color: var(--text-2);
+      font-size: 16px;
+      margin-bottom: 16px;
+      padding-left: 14px;
+      border-left: 2px solid var(--gold);
+    }
+    .host-content p {
+      font-size: 15.5px;
+      color: var(--text-2);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .host-achievements {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .ha {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+    .ha-num { font-size: 22px; font-weight: 900; color: var(--gold); letter-spacing: -0.5px; }
+    .ha-label { font-size: 12px; color: var(--text-3); margin-top: 4px; letter-spacing: 0.3px; }
+    @media (max-width: 880px) {
+      .host-grid { grid-template-columns: 1fr; gap: 32px; }
+      .host-photo-wrap { max-width: 360px; margin: 0 auto; }
+    }
+
+    /* ============================================================
+       AGENDA
+    ============================================================ */
+    .agenda-section { padding: 100px 0; }
+    .agenda-header { text-align: center; margin-bottom: 48px; }
+    .agenda-list {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .agenda-item {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 20px;
+      align-items: flex-start;
+      background: var(--bg-1);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 22px 24px;
+      transition: border-color 0.3s, transform 0.3s var(--ease);
+    }
+    .agenda-item:hover { border-color: rgba(201,162,39,0.24); transform: translateX(4px); }
+    .agenda-num {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(201,162,39,0.3);
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .agenda-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .agenda-desc { font-size: 14px; color: var(--text-2); line-height: 1.6; }
+
+    /* ============================================================
+       SCARCITY BANNER
+    ============================================================ */
+    .scarcity {
+      padding: 56px 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, rgba(201,162,39,0.10), transparent 70%),
+        var(--re-navy);
+      border-top: 1px solid rgba(201,162,39,0.18);
+      border-bottom: 1px solid rgba(201,162,39,0.18);
+    }
+    .scarcity-inner {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .scarcity h3 {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 12px;
+    }
+    .scarcity p {
+      color: var(--text-2);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .scarcity p strong { color: var(--gold); font-weight: 700; }
+
+    /* ============================================================
+       TESTIMONIALS
+    ============================================================ */
+    .testimonials-section { padding: 100px 0; }
+    .testimonials-header { text-align: center; margin-bottom: 48px; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .t-card {
+      background: var(--bg-1);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s ease;
+    }
+    .t-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+      border-color: rgba(201,162,39,0.2);
+    }
+    .t-video-wrap {
+      padding: 56.25% 0 0 0;
+      position: relative;
+    }
+    .t-video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+      display: block;
+    }
+    @media (max-width: 720px) {
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       REGISTRATION FORM
+    ============================================================ */
+    .register-section {
+      padding: 100px 0;
+      background: var(--bg-1);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .register-box {
+      max-width: 640px;
+      margin: 0 auto;
+      background: linear-gradient(180deg, rgba(20,37,61,0.4) 0%, var(--bg-1) 60%);
+      border: 1px solid rgba(201,162,39,0.22);
+      border-radius: 24px;
+      padding: 48px 40px;
+      position: relative;
+    }
+    .register-box::before {
+      content: '';
+      position: absolute;
+      top: -1px; left: 16%; right: 16%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .register-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .register-header .section-eyebrow { color: var(--gold); }
+    .register-header h2 {
+      font-size: clamp(26px, 3.6vw, 36px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+    .register-header p {
+      font-size: 14.5px;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .form-field { display: flex; flex-direction: column; }
+    .form-field.full { grid-column: span 2; }
+    .form-field label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      color: var(--text-2);
+      margin-bottom: 6px;
+    }
+    .form-field input,
+    .form-field textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 12px;
+      padding: 13px 14px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14.5px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .form-field input:focus,
+    .form-field textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.06);
+    }
+    .form-field textarea { resize: vertical; min-height: 90px; }
+    .form-submit {
+      grid-column: span 2;
+      margin-top: 10px;
+      width: 100%;
+      justify-content: center;
+      font-size: 16px;
+      padding: 17px 28px;
+    }
+    .form-reassure {
+      grid-column: span 2;
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--text-3);
+      margin-top: 4px;
+    }
+    @media (max-width: 560px) {
+      .register-box { padding: 36px 24px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .form-field.full,
+      .form-submit,
+      .form-reassure { grid-column: span 1; }
+    }
+
+    /* ============================================================
+       FAQ
+    ============================================================ */
+    .faq-section { padding: 100px 0 120px; }
+    .faq-header { text-align: center; margin-bottom: 48px; }
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .faq-item {
+      background: var(--bg-1);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .faq-item[open] { border-color: rgba(201,162,39,0.28); }
+    .faq-item summary {
+      list-style: none;
+      padding: 20px 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      font-size: 15.5px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary:hover { background: rgba(255,255,255,0.025); }
+    .faq-icon {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--gold);
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+      font-size: 14px;
+      transition: transform 0.3s var(--ease);
+    }
+    .faq-item[open] .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      padding: 0 22px 22px;
+      color: var(--text-2);
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      padding: 48px 0 36px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+    }
+    .footer-logo { font-size: 16px; font-weight: 800; color: var(--text); }
+    .footer-logo span { color: var(--gold); }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      font-size: 12.5px;
+      color: var(--text-3);
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text-2); }
+    .footer-sep { color: var(--text-3); font-size: 11px; }
+    .footer-copy { font-size: 12px; color: var(--text-3); }
+
+    /* ============================================================
+       STICKY MOBILE CTA
+    ============================================================ */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 198;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(8,8,8,0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid rgba(201,162,39,0.22);
+      display: none;
+      transform: translateY(100%);
+      transition: transform 0.4s var(--ease);
+    }
+    .sticky-cta.show { transform: translateY(0); }
+    .sticky-cta a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 20px;
+      border-radius: 100px;
+      text-decoration: none;
+    }
+    .sticky-cta a:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+    @media (max-width: 760px) {
+      .sticky-cta { display: block; }
+      body { padding-bottom: 78px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     URGENCY BAR (RE-specific, fixed top)
+============================================================ -->
+<div class="urgency-bar" role="region" aria-label="Limited availability">
+  Only <strong id="seatCount">25</strong> seats left for the Elevate Real Estate Mastermind
+  <span class="countdown" id="countdown">starts soon</span>
+</div>
+
+<!-- ============================================================
+     NAVBAR
+============================================================ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Winners <span>Circle</span></a>
+    <div class="nav-links">
+      <a href="/#about" class="nav-link">About John</a>
+      <a href="/#pricing" class="nav-link">Membership</a>
+      <a href="https://winners-circle-portal-production.up.railway.app/" class="nav-link nav-link-app" target="_blank" rel="noopener">Members App ↗</a>
+    </div>
+    <a href="#register" class="nav-cta">Reserve My Spot</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/#about">About John</a>
+  <a href="/#pricing">Membership</a>
+  <a href="https://winners-circle-portal-production.up.railway.app/" target="_blank" rel="noopener">Members App ↗</a>
+  <a href="#register" class="mobile-menu-cta">Reserve My Spot</a>
+</div>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-pill reveal">For Real Estate Pros Who Want More</div>
+    <h1 class="reveal d1">
+      Build the Real Estate<br>
+      Business <span class="gradient-text">You Actually Want</span>.
+    </h1>
+    <p class="hero-sub reveal d2">
+      One live Zoom mastermind for agents, brokers, and team leaders ready to scale past stalled pipelines, hire-and-pray recruiting, and the solo-producer ceiling — hosted by John Wentworth.
+    </p>
+    <div class="hero-cta-group reveal d3">
+      <a href="#register" class="btn-primary">
+        Reserve My Free Spot
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 7.5H12M12 7.5L8.5 4M12 7.5L8.5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#agenda" class="btn-ghost">What you'll get →</a>
+    </div>
+    <div class="hero-reassure reveal d4">
+      <span>No cost</span>
+      <span>No contracts</span>
+      <span>Live with John</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOCIAL PROOF STRIP
+============================================================ -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-num">$1B+</div>
+        <div class="stat-label">In Real Estate Sales</div>
+      </div>
+      <div class="stat-item reveal d1">
+        <div class="stat-num">#1</div>
+        <div class="stat-label">Independent Brokerage in Michigan</div>
+      </div>
+      <div class="stat-item reveal d2">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Members Growing Together</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     WHAT YOU'LL LEARN
+============================================================ -->
+<section class="learn-section">
+  <div class="container">
+    <div class="learn-header">
+      <div class="section-eyebrow reveal">What You'll Walk Away With</div>
+      <h2 class="section-title reveal d1">Five real-estate problems,<br><span class="gold">solved on one call</span>.</h2>
+      <p class="section-sub reveal d2" style="margin: 0 auto;">
+        No theory. No fluff. Just the specific frameworks John used to build the #1 independent brokerage in Michigan — translated for where you are right now.
+      </p>
+    </div>
+    <div class="learn-grid">
+      <div class="l-card reveal">
+        <div class="l-icon" aria-hidden="true">📈</div>
+        <div class="l-title">Lead Gen That Refills the Pipeline</div>
+        <div class="l-desc">The exact channels and follow-up cadence that keep agents from ever sitting on a dry pipeline again.</div>
+      </div>
+      <div class="l-card reveal d1">
+        <div class="l-icon" aria-hidden="true">🏠</div>
+        <div class="l-title">Listing Presentations That Convert</div>
+        <div class="l-desc">A repeatable structure to win listings against discount brokers and high-volume teams — without dropping your commission.</div>
+      </div>
+      <div class="l-card reveal d2">
+        <div class="l-icon" aria-hidden="true">👥</div>
+        <div class="l-title">Scale Past the Solo-Producer Ceiling</div>
+        <div class="l-desc">The first three hires every producing agent needs to make, and the comp structure that makes them stick.</div>
+      </div>
+      <div class="l-card reveal d1">
+        <div class="l-icon" aria-hidden="true">🎯</div>
+        <div class="l-title">Recruit Agents Who Actually Produce</div>
+        <div class="l-desc">How John built a 100+ professional team — without burning cash on recruits who ghost after 90 days.</div>
+      </div>
+      <div class="l-card reveal d2">
+        <div class="l-icon" aria-hidden="true">🔁</div>
+        <div class="l-title">Build a Referral Engine on Autopilot</div>
+        <div class="l-desc">The systems that turn one closed client into three more deals — without you chasing or begging.</div>
+      </div>
+      <div class="l-card reveal d3">
+        <div class="l-icon" aria-hidden="true">🧠</div>
+        <div class="l-title">Operator Mindset, Not Hustle Mindset</div>
+        <div class="l-desc">How to think like a 7-figure operator — so your business stops depending on whether you feel motivated this morning.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOST SECTION
+============================================================ -->
+<section class="host-section" id="about">
+  <div class="container">
+    <div class="host-grid">
+      <div class="host-photo-wrap reveal">
+        <img src="john-wentworth.jpg" alt="John Wentworth, CEO of Wentworth Real Estate Group" />
+        <div class="host-photo-tag">Your host</div>
+      </div>
+      <div class="host-content reveal d1">
+        <div class="section-eyebrow">Meet Your Mentor</div>
+        <h2>The operator behind <span class="gold">$1B in sales</span>.</h2>
+        <div class="host-quote">"My mission is clear — develop people &amp; change lives."</div>
+        <p>
+          At 35, John went from completely broke to building a 7-figure real estate business from the ground up. His journey — through childhood trauma, addiction, and reclaiming his life through sobriety — shaped a leader defined by transparency, heart, and zero BS.
+        </p>
+        <p>
+          Today, as CEO of the #1 Independent Large Team Brokerage in Michigan with over $1 billion in sales, John leads 100+ professionals while mentoring real estate operators to scale past the ceilings that keep most agents stuck.
+        </p>
+        <div class="host-achievements">
+          <div class="ha"><div class="ha-num">$1B+</div><div class="ha-label">Total Sales Volume</div></div>
+          <div class="ha"><div class="ha-num">#1</div><div class="ha-label">Indie Brokerage in MI</div></div>
+          <div class="ha"><div class="ha-num">100+</div><div class="ha-label">Professionals on His Team</div></div>
+          <div class="ha"><div class="ha-num">20yr</div><div class="ha-label">Entrepreneurial Experience</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     AGENDA
+============================================================ -->
+<section class="agenda-section" id="agenda">
+  <div class="container">
+    <div class="agenda-header">
+      <div class="section-eyebrow reveal">What to Expect</div>
+      <h2 class="section-title reveal d1">Your <span class="gold">60-minute</span> agenda.</h2>
+      <p class="section-sub reveal d2" style="margin: 0 auto;">
+        Show up live. Bring one problem you want solved. Leave with a plan.
+      </p>
+    </div>
+    <div class="agenda-list">
+      <div class="agenda-item reveal">
+        <div class="agenda-num">01</div>
+        <div>
+          <div class="agenda-title">Where the money actually is in real estate right now</div>
+          <div class="agenda-desc">The market shifts most agents missed — and the lanes John's team is winning in this year.</div>
+        </div>
+      </div>
+      <div class="agenda-item reveal d1">
+        <div class="agenda-num">02</div>
+        <div>
+          <div class="agenda-title">A live teardown of the operator playbook</div>
+          <div class="agenda-desc">Lead gen → conversion → retention → referral. The exact loop John runs his team on, walked through end to end.</div>
+        </div>
+      </div>
+      <div class="agenda-item reveal d2">
+        <div class="agenda-num">03</div>
+        <div>
+          <div class="agenda-title">Live hot-seat coaching</div>
+          <div class="agenda-desc">A few attendees get John to look at their actual numbers and tell them where they're leaving money on the table.</div>
+        </div>
+      </div>
+      <div class="agenda-item reveal d3">
+        <div class="agenda-num">04</div>
+        <div>
+          <div class="agenda-title">Open Q&amp;A — anything goes</div>
+          <div class="agenda-desc">Bring whatever's keeping you up at night. Recruiting, comp plans, listing scripts, mindset — John will answer it on camera.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SCARCITY
+============================================================ -->
+<section class="scarcity">
+  <div class="container">
+    <div class="scarcity-inner reveal">
+      <h3>This call is capped at <span class="gold">25 seats</span>.</h3>
+      <p>
+        We keep it small so John can actually see you, hear you, and coach you live. <strong>Recording is not guaranteed</strong> — if you want the room, you have to be in the room.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+============================================================ -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="testimonials-header">
+      <div class="section-eyebrow reveal">From Real Members</div>
+      <h2 class="section-title reveal d1">Hear it from <span class="gold">the room</span>.</h2>
+      <p class="section-sub reveal d2" style="margin: 0 auto;">
+        Two members on what changed for them after working with John.
+      </p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="t-card reveal">
+        <div class="t-video-wrap">
+          <iframe src="https://player.vimeo.com/video/1197128238?h=f5f60bc0ea&badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Member testimonial 1"></iframe>
+        </div>
+      </div>
+      <div class="t-card reveal d1">
+        <div class="t-video-wrap">
+          <iframe src="https://player.vimeo.com/video/1197128239?h=6957195b53&badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Member testimonial 2"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     REGISTRATION FORM
+============================================================ -->
+<section class="register-section" id="register">
+  <div class="container">
+    <div class="register-box reveal">
+      <div class="register-header">
+        <div class="section-eyebrow">Reserve My Spot</div>
+        <h2>One free seat. One live call.<br><span class="gold">Zero pitch — just work</span>.</h2>
+        <p>Fill this out and we'll send you the Zoom link plus a calendar invite. <strong style="color:var(--gold);">Spots are first-come, first-served.</strong></p>
+      </div>
+      <!-- ↓ Replace FORM_HANDLER_URL with your form endpoint (Mailchimp, ConvertKit, Tally, Typeform, etc.) -->
+      <form class="form-grid" id="registerForm" action="FORM_HANDLER_URL" method="POST" novalidate>
+        <div class="form-field">
+          <label for="firstName">First name</label>
+          <input id="firstName" name="firstName" type="text" autocomplete="given-name" required />
+        </div>
+        <div class="form-field">
+          <label for="lastName">Last name</label>
+          <input id="lastName" name="lastName" type="text" autocomplete="family-name" required />
+        </div>
+        <div class="form-field full">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+        <div class="form-field full">
+          <label for="brokerage">Brokerage / team</label>
+          <input id="brokerage" name="brokerage" type="text" required />
+        </div>
+        <div class="form-field full">
+          <label for="problem">What's the #1 thing you want John to help you solve?</label>
+          <textarea id="problem" name="problem" rows="3" placeholder="e.g., my pipeline goes cold every 90 days, recruiting drains my time, I can't get past $X in GCI..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary form-submit">
+          Reserve My Free Spot
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M3 7.5H12M12 7.5L8.5 4M12 7.5L8.5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <p class="form-reassure">Free · No contracts · Cancel any future communication anytime</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="faq-header">
+      <div class="section-eyebrow reveal">FAQ</div>
+      <h2 class="section-title reveal d1">Real questions, <span class="gold">real answers</span>.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary>Is this really free?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">Yes. No credit card, no upsell on the call, no catch. We run this because most agents have never seen what a real operator playbook looks like — and the easiest way to show it is to actually run one with you.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Will it be recorded?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">Recording is not guaranteed. We keep these sessions intentionally small and intimate — if a recording happens, registrants get first access, but the only way to be sure you don't miss it is to show up live.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Who is this actually for?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">Real estate agents, brokers, and team leaders who are past the "do I want to do this?" phase and are now asking "how do I scale this without burning out?" If you've closed at least a few deals and are serious about building a real business, you're in the room.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Will you pitch me on something?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">At the end John will mention how The Winners Circle Elevate tier works for the few attendees who want ongoing coaching. It's a one-minute mention, not a 30-minute pitch. The other 59 minutes are about your business.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>What if I can't make the live time?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">Reserve a spot anyway and let us know on the form. If a recording is made available we'll send it to registered attendees. But the hot-seat coaching only happens live — so do everything you can to clear the calendar.</div>
+      </details>
+      <details class="faq-item reveal">
+        <summary>What if I'm not in Michigan?
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div class="faq-answer">Doesn't matter. Real estate is local; operator principles aren't. John coaches members across the country (and outside it) — the playbook works wherever you sell.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">The Winners <span>Circle</span></div>
+      <div class="footer-links">
+        <a href="#">Terms &amp; Conditions</a>
+        <span class="footer-sep">·</span>
+        <a href="#">Privacy Policy</a>
+        <span class="footer-sep">·</span>
+        <a href="#register">Reserve My Spot</a>
+      </div>
+      <div class="footer-copy">© The Winners Circle · All Rights Reserved</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     STICKY MOBILE CTA
+============================================================ -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="#register">
+    Reserve My Free Spot
+    <svg width="14" height="14" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M3 7.5H12M12 7.5L8.5 4M12 7.5L8.5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  // ---- Mobile hamburger menu ----
+  const hamburger = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // ---- Nav scroll effect ----
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 30);
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ---- Sticky mobile CTA — show after hero ----
+  const sticky = document.getElementById('stickyCta');
+  const heroSection = document.querySelector('.hero');
+  const stickyObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      sticky.classList.toggle('show', !e.isIntersecting);
+    });
+  }, { threshold: 0.1 });
+  if (heroSection) stickyObserver.observe(heroSection);
+
+  // ---- Intersection Observer: scroll-reveal ----
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // ---- Countdown to event ----
+  // ↓ Replace EVENT_DATE_ISO with the actual ISO date string for the live call
+  const EVENT_DATE_ISO = 'EVENT_DATE_ISO'; // e.g. '2026-06-18T16:00:00Z'
+  const cdEl = document.getElementById('countdown');
+  function fmt(n) { return String(n).padStart(2, '0'); }
+  function updateCountdown() {
+    const target = new Date(EVENT_DATE_ISO).getTime();
+    if (isNaN(target)) { cdEl.textContent = 'starts soon'; return; }
+    const diff = target - Date.now();
+    if (diff <= 0) { cdEl.textContent = 'live now'; return; }
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins = Math.floor((diff % 3600000) / 60000);
+    cdEl.textContent = days > 0 ? `${days}d ${fmt(hours)}h ${fmt(mins)}m` : `${fmt(hours)}h ${fmt(mins)}m`;
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+
+  // ---- Form submit: gentle inline validation ----
+  const form = document.getElementById('registerForm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      const requireds = form.querySelectorAll('[required]');
+      let ok = true;
+      requireds.forEach(el => {
+        if (!el.value.trim()) {
+          ok = false;
+          el.style.borderColor = '#ff6b6b';
+        } else {
+          el.style.borderColor = '';
+        }
+      });
+      if (!ok) {
+        e.preventDefault();
+        const first = form.querySelector('[required]');
+        if (first) first.focus();
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
