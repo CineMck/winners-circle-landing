@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The Winners Circle landing page",
   "scripts": {
-    "start": "serve -s . -p ${PORT:-3000}"
+    "start": "serve . -p ${PORT:-3000}"
   },
   "dependencies": {
     "serve": "^14.2.0"
