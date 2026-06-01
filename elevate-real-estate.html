@@ -1395,39 +1395,6 @@
   updateCountdown();
   setInterval(updateCountdown, 60000);
 
-  // ---- Suppress Vimeo end-screen recommendations ----
-  // Free Vimeo accounts ignore ?outro=nothing — use the Player API to
-  // reset the video just before it ends so the end screen never renders.
-  function initVimeoEndScreenSuppressor() {
-    if (typeof Vimeo === 'undefined' || !Vimeo.Player) return;
-    const iframe = document.getElementById('promoVideo');
-    if (!iframe) return;
-    const player = new Vimeo.Player(iframe);
-    let duration = 0;
-    let resetting = false;
-    player.getDuration().then(d => { duration = d; }).catch(() => {});
-    player.on('timeupdate', (data) => {
-      if (!duration || resetting) return;
-      // Trigger ~0.4s before end — far enough to beat the end-screen render
-      if (data.seconds >= duration - 0.4) {
-        resetting = true;
-        player.pause()
-          .then(() => player.setCurrentTime(0))
-          .finally(() => { setTimeout(() => { resetting = false; }, 250); });
-      }
-    });
-    // Safety net: if 'ended' still fires, immediately seek back to 0
-    player.on('ended', () => {
-      player.setCurrentTime(0).catch(() => {});
-    });
-  }
-  if (typeof Vimeo !== 'undefined' && Vimeo.Player) {
-    initVimeoEndScreenSuppressor();
-  } else {
-    // Vimeo player.js is loaded with `defer` — wait for it
-    window.addEventListener('load', initVimeoEndScreenSuppressor);
-  }
-
   // ---- Form submit: gentle inline validation ----
   const form = document.getElementById('registerForm');
   if (form) {
