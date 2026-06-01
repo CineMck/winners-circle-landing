@@ -287,32 +287,34 @@
       position: absolute;
       inset: 0;
       pointer-events: none;
+      background: url('hero-bg.png') center / cover no-repeat;
     }
+    /* Darkening + vignette overlay so gold text stays legible */
     .hero-bg::before {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 100% 70% at 50% -10%, rgba(201,162,39,0.14) 0%, transparent 65%),
-        radial-gradient(ellipse 70% 50% at 50% 100%, rgba(20,37,61,0.55) 0%, transparent 70%);
+        radial-gradient(ellipse 100% 70% at 50% -10%, rgba(201,162,39,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 85% 70% at 50% 55%, rgba(8,8,8,0.25) 0%, rgba(8,8,8,0.78) 90%),
+        linear-gradient(180deg, rgba(8,8,8,0.55) 0%, rgba(8,8,8,0.40) 35%, rgba(8,8,8,0.75) 90%);
     }
     .hero-bg::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 200px;
+      height: 220px;
       background: linear-gradient(to bottom, transparent, var(--bg));
     }
-    /* Blueprint grid lines — distinct from index.html's plain grid */
+    /* Subtle blueprint overlay — softer now that the photo carries its own blueprint */
     .hero-grid {
       position: absolute;
       inset: 0;
       background-image:
         linear-gradient(var(--re-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--re-line) 1px, transparent 1px),
-        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size: 240px 240px, 240px 240px, 60px 60px, 60px 60px;
+        linear-gradient(90deg, var(--re-line) 1px, transparent 1px);
+      background-size: 240px 240px, 240px 240px;
+      opacity: 0.35;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 30%, black 40%, transparent 80%);
       -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 30%, black 40%, transparent 80%);
     }
